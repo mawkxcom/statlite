@@ -1,0 +1,19 @@
+[Unit]
+Description=Statlite analytics service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/statlite
+Environment=NODE_ENV=production
+Environment=STATLITE_DATA=/var/lib/statlite
+Environment=PORT=8787
+ExecStart=/usr/bin/node /opt/statlite/server/dist/index.js --port=${PORT}
+Restart=always
+RestartSec=3
+User=www-data
+Group=www-data
+
+[Install]
+WantedBy=multi-user.target
+

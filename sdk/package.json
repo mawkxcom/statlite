@@ -1,0 +1,23 @@
+{
+  "name": "@statlite/sdk",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format iife --global-name Statlite --dts --minify --sourcemap",
+    "dev": "tsup src/index.ts --watch --format iife --global-name Statlite"
+  },
+  "dependencies": {
+    "nanoid": "^5.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.5",
+    "tsup": "^8.2.4",
+    "typescript": "^5.6.3"
+  }
+}
+

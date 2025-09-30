@@ -1,0 +1,47 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript build outputs
+*.tsbuildinfo
+
+# Monorepo packages
+server/dist/
+sdk/dist/
+
+# General build outputs
+/dist/
+/build/
+/.cache/
+
+# Env files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Coverage
+coverage/
+
+# Database / data
+/data/
+*.sqlite
+*.sqlite-journal
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.local
+*.swp
