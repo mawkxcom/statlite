@@ -8,11 +8,13 @@ WorkingDirectory=/opt/statlite
 Environment=NODE_ENV=production
 Environment=STATLITE_DATA=/var/lib/statlite
 Environment=PORT=8787
-ExecStart=/usr/bin/node /opt/statlite/server/dist/index.js --port=${PORT}
+ExecStart=/usr/bin/node /opt/statlite/server/index.js --port=${PORT}
 Restart=always
 RestartSec=3
-User=www-data
-Group=www-data
+# User=www-data
+# Group=www-data
+# Note: Commented out User/Group to run as root by default.
+# Uncomment and set appropriate user if needed.
 
 [Install]
 WantedBy=multi-user.target

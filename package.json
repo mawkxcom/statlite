@@ -14,6 +14,7 @@
     "build": "npm -w @statlite/server run build && npm -w @statlite/sdk run build",
     "postbuild": "node scripts/copy-sdk.mjs",
     "release": "node scripts/release.mjs",
+    "deploy": "node scripts/deploy.mjs",
     "dev": "npm -w @statlite/server run dev",
     "start": "npm -w @statlite/server start"
   }

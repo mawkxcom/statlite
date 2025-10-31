@@ -19,6 +19,11 @@ sdk/      # 轻量JS SDK，打包为 IIFE（全局 Statlite）
 public/   # 可用于部署时托管 SDK 文件
 ```
 
+## 系统要求
+- Node.js >= 18.17（推荐 18 LTS 或 20 LTS）
+- 服务器 GLIBC >= 2.27（CentOS 8+、Ubuntu 18.04+、Debian 10+）
+- 如系统较旧（如 CentOS 7），推荐使用 Docker 部署
+
 ## 快速开始
 ```bash
 # 1) 安装依赖（在仓库根目录）
@@ -206,6 +211,54 @@ sudo systemctl enable --now statlite
 # 查看状态
 systemctl status statlite
 ```
+
+## 一键部署到远程服务器
+仓库提供交互式部署脚本 `scripts/deploy.mjs`，自动完成：构建、上传、安装依赖、启动服务。
+
+### 使用方式
+```bash
+# 首次运行会进入交互式配置
+npm run deploy
+
+# 或手动编写配置文件 deploy.config.json（参考 deploy.config.json.example）
+# 再次运行时会自动使用已保存配置
+npm run deploy
+```
+
+### 配置说明（deploy.config.json）
+```json
+{
+  "host": "192.168.1.100",       // 服务器 IP/域名
+  "port": 22,                     // SSH 端口
+  "username": "root",             // SSH 用户名
+  "password": "",                 // SSH 密码（如使用密钥则留空）
+  "keyFile": "~/.ssh/id_rsa",    // SSH 私钥路径（如使用密码则留空）
+  "remoteDir": "/opt/statlite",   // 远程部署目录
+  "runMode": "systemd",           // 运行方式：systemd 或 command
+  "useNvm": false,                // 服务器是否使用 nvm 管理 Node
+  "nvmNodeVersion": "18"          // nvm 环境的 Node 版本
+}
+```
+
+### 交互式问题
+- Server IP/hostname：服务器地址
+- SSH port：SSH 端口（默认 22）
+- SSH username：登录用户名
+- Auth mode：认证方式（password 或 keyfile）
+- Path to SSH private key：私钥文件路径（选择 keyfile 时）
+- SSH password：密码（选择 password 时）
+- Remote directory：部署目录（默认 /opt/statlite）
+- Run mode：启动方式（systemd 或 command）
+- Use nvm?：服务器是否使用 nvm（yes/no）
+- nvm node version：Node 版本号（如 18、lts、node 等）
+
+### 注意事项
+- 密码认证时，SSH/SCP 会交互式提示输入密码（无需额外工具）。
+- 推荐使用 SSH 密钥认证（免密登录）以提升体验。
+- systemd 模式需要服务器 sudo 权限。
+- 服务器需要预装 Node.js（或 nvm）与 npm；脚本会自动在服务器上安装生产依赖。
+- 配置文件 `deploy.config.json` 已加入 `.gitignore`，避免敏感信息泄露。
+- **重要**：服务器系统需满足 Node.js 18+ 的 GLIBC 要求（>= 2.27）。CentOS 7 等旧系统建议改用 Docker 部署。
 
 ## 许可证
 MIT

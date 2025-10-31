@@ -45,3 +45,6 @@ coverage/
 # Misc
 *.local
 *.swp
+
+# Deploy config (may contain sensitive info)
+deploy.config.json
